@@ -1,9 +1,12 @@
 import Home from "../pages/Home";
-import Login from "../pages/Login";
+import SignIn from "../pages/SignIn";
 import NoPage from "../pages/NoPage";
+import SignUp from "../pages/SignUp";
 
 export const HOME = "/"
-export const LOG_IN = "/login"
+export const SIGN_IN = "/sign-in";
+export const SIGN_UP = "/sign-up";
+
 export const ROUTES = {
     PRIVATE_ROUTE: [
         {
@@ -14,8 +17,12 @@ export const ROUTES = {
     ],
     PUBLIC_ROUTE: [
         {
-            path: LOG_IN,
-            element: Login,
+            path: SIGN_IN,
+            element: SignIn,
+        },
+        {
+            path: SIGN_UP,
+            element: SignUp,
         },
         {
             path: "*",

@@ -4,13 +4,12 @@ const AuthLayout = ({ children }: any) => {
 
 
   return (
-    <div className="h-screen flex bg-[#000000]">
-      <div className={` rounded-e-3xl w-[40%] object-cover bg-center bg-cover bg-no-repeat`} style={{
+    <div className="h-full flex bg-[#000000] overflow-y-auto">
+      {/* <div className={` rounded-e-3xl w-[40%] min-h-screen object-cover bg-center bg-cover bg-no-repeat`} style={{
         backgroundImage: `url(${imgData})`
       }}>
-        <h1>hello</h1>
-      </div>
-      <div className=" w-[60%]">
+      </div> */}
+      <div className=" w-full">
         {children}
       </div>
     </div>
