@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik'
-import { SignInValue } from '../../types/auth';
+import { SignInValue, SignUpValue } from '../../types/auth';
 import { SignInSchema } from '../../constant/validation.constant';
 import CustomTextField from '../../components/CustomTextField';
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -7,11 +7,35 @@ import { MdEmail } from "react-icons/md";
 import ErrorMessage from '../../components/ErrorMessage';
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import { SIGN_UP } from '../../constant/route.constant';
+import { HOME, SIGN_UP } from '../../constant/route.constant';
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store/store';
+import { ToastNotification } from '../../components/ToastNotification';
+import { user } from '../../store/AuthStore/AuthStoreSlice';
+
 function SignIn() {
   const initialValues: SignInValue = { email: "", password: "" };
   const [showPassword, setShowPassword] = useState(false)
+  const data = useSelector((state: RootState) => state.Auth.usersData)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleSubmit = (value: SignInValue) => {
+    let userData = data.find((item: SignUpValue) => item.email.toLowerCase() === value.email.toLowerCase())
+    if (userData) {
+      if (userData.password === value.password) {
+        ToastNotification({ status: "success", message: 'User login successfully' })
+        dispatch(user(userData))
+        navigate(HOME)
+      }
+      else {
+        ToastNotification({ status: "error", message: 'Password is incorrect' })
+      }
+    }
+    else {
+      ToastNotification({ status: "error", message: 'Email is not exist' })
+    }
+  }
   return (
     <div className="w-full min-h-screen bg-[#000000] flex items-center justify-center">
       <div className="max-w-[550px] w-full p-2 rounded-lg relative group overflow-hidden">
@@ -25,8 +49,7 @@ function SignIn() {
             <Formik
               initialValues={initialValues}
               validationSchema={SignInSchema}
-              onSubmit={(value) => console.log({ value })
-              }>
+              onSubmit={(value) => handleSubmit(value)} >
               {({ errors }) => (
                 <Form>
                   <div className="flex flex-col gap-2.5 mb-7">

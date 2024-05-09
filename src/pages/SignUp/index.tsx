@@ -11,10 +11,40 @@ import { useNavigate } from 'react-router-dom';
 import { SIGN_IN } from '../../constant/route.constant';
 import { interestsData, professionData } from '../../constant/constant';
 import AbsoluteIcon from '../../components/AbsoluteIcon';
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUser } from '../../store/AuthStore/AuthStoreSlice';
+import { RootState } from '../../store/store';
+import { ToastNotification } from '../../components/ToastNotification';
+
 function SignUp() {
     const initialValues: SignUpValue = { userName: "", email: "", password: "", gender: "Male", profession: "", interests: [] };
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const data = useSelector((state: RootState) => state.Auth.usersData)
+
+    const handleInterestsChange = ({ e, values, setFieldValue }: any) => {
+        let value = e.target.value
+        if (!values.interests.includes(value)) {
+            setFieldValue("interests", [...values.interests, e.target.value])
+        }
+        else {
+            let newData = values.interests.filter((item: string) => item !== value)
+            setFieldValue("interests", [...newData])
+        }
+    }
+    const handleSubmit = (value: SignUpValue) => {
+        if (data.find(
+            (item: SignUpValue) => item.email.toLowerCase() === value.email.toLowerCase()
+        )) {
+            ToastNotification({ status: "error", message: 'Email is already register' })
+        }
+        else {
+            dispatch(registerUser(value))
+            ToastNotification({ status: "success", message: 'User register successfully' })
+            navigate(SIGN_IN)
+        }
+    }
     return (
         <div className="w-full min-h-screen bg-[#000000] flex items-center justify-center">
             <div className="max-w-[550px] w-full p-2 rounded-lg relative group overflow-hidden">
@@ -22,17 +52,14 @@ function SignUp() {
                     <div className="w-full h-full px-4 py-6 border border-[#ffffff60] rounded-lg">
                         <div className="flex justify-center mb-5">
                             <span className="text-[#c4c4c4] uppercase font-righteous text-lg">
-                                Login
+                                Register
                             </span>
                         </div>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={SignUpSchema}
-                            onSubmit={(value) => console.log({ value })
-                            }>
-                            {({ errors, values }) => {
-                                console.log({ errors });
-
+                            onSubmit={(value) => handleSubmit(value)}>
+                            {({ errors, values, setFieldValue }) => {
                                 return (
                                     <Form>
                                         <div className="flex flex-col gap-2.5 mb-7">
@@ -113,6 +140,7 @@ function SignUp() {
                                                 <div className="flex gap-0.5 bg-[#2c2c2c90] rounded-md py-2.5 pr-4 pl-14 relative">
                                                     <div className="flex">
                                                         <Field as="select" name="interests"
+                                                            onChange={(e: any) => handleInterestsChange({ e, values, setFieldValue })}
                                                             multiple className="bg-transparent text-[#c2c2c250] w-full min-w-[410px] outline-none border-none appearance-none">
                                                             {interestsData.map((item, index) => (
                                                                 <option className='text-black bg-[#2c2c2c90]' value={item.value} key={index}>{item.text}</option>
@@ -129,7 +157,7 @@ function SignUp() {
                                                 className="w-full text-white rounded-md py-3 mt-3 bg-[#262626]"
                                                 type="submit"
                                             >
-                                                Login
+                                                Register
                                             </button>
                                             <p className='w-full text-white text-center'>Already have an account? <span className='font-semibold cursor-pointer' onClick={() => navigate(SIGN_IN)}>Login</span> </p>
                                         </div>
