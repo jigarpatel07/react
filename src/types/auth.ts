@@ -7,6 +7,12 @@ export type SignUpValue = {
     email: string;
     password: string;
     gender: string;
-    profession: string;
-    interests: string[]
+    profession: {
+        value: string;
+        label: string
+    };
+    interests: {
+        value: string;
+        label: string
+    }[]
 };

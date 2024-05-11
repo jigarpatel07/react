@@ -1,36 +1,28 @@
 export const professionData = [
     {
-        text: "Select a profession",
-        value: ""
-    },
-    {
-        text: "Front-end Devloper",
+        label: "Front-end Devloper",
         value: "Front-end"
     },
     {
-        text: "Back-end Devlpoer",
+        label: "Back-end Devlpoer",
         value: "Back-end"
     },
     {
-        text: "full-stack developern",
+        label: "full-stack developern",
         value: "full-stack"
     },
 ]
 export const interestsData = [
     {
-        text: "Select interests",
-        value: ""
-    },
-    {
-        text: "Sports",
+        label: "Sports",
         value: "sports"
     },
     {
-        text: "Music",
+        label: "Music",
         value: "music"
     },
     {
-        text: "Movies",
+        label: "Movies",
         value: "movies"
     },
 ]

@@ -1,7 +1,7 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { ROUTES } from './constant/route.constant'
-import View from './pages/View'
+import View from './pages/View/View'
 import AuthLayout from './pages/AuthLayout'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -1,14 +1,18 @@
 import { Field } from "formik"
+import classNames from 'classnames'
+
 function CustomTextField({
     name,
     placeholder,
     multiline,
-    type = "text"
+    type = "text",
+    isDisabled
 }: {
     name: string
     placeholder: string
     multiline?: boolean
     type?: string
+    isDisabled?: boolean
 }) {
 
     return (
@@ -21,7 +25,8 @@ function CustomTextField({
                 rows={multiline && 4}
                 margin="normal"
                 placeholder={placeholder}
-                className="w-full bg-[#2c2c2c90] rounded-md py-2.5 pr-4 pl-14 placeholder:text-[#c2c2c250] caret-[#aeaeae] text-[#aeaeae] focus:outline-none"
+                disabled={isDisabled}
+                className={classNames("w-full  rounded-md py-2.5 pr-4 pl-14 placeholder:text-[#c2c2c250] caret-[#aeaeae] text-[#aeaeae] focus:outline-none}", isDisabled ? 'bg-[#6e6e6e] cursor-not-allowed' : "bg-[#2c2c2c90]")}
             />
         </div>
     )
