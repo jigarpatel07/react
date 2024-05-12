@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames'
+import CustomAvatar from './CustomAvatar';
 
 const Table = ({ data, columns, itemsPerPage }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,9 @@ const Table = ({ data, columns, itemsPerPage }: any) => {
         <div className='flex flex-col gap-4 '>
             <table className='bg-[#282828] w-full rounded-lg overflow-hidden'>
                 <thead >
-                    <tr className='bg-[#aeaeae] w-full text-[#282828] text-center'>
+                    <tr className='bg-[#aeaeae] w-full text-[#282828] text-center capitalize'>
+                        <th>Number</th>
+                        <th>Avatar</th>
                         {columns.map((column: any) => (
                             <th key={column.accessorKey}>{column.header}</th>
                         ))}
@@ -24,9 +27,11 @@ const Table = ({ data, columns, itemsPerPage }: any) => {
                 </thead>
                 <tbody >
                     {currentItems?.map((item: any, index) => (
-                        <tr key={index}>
+                        <tr key={index} className='text-center text-[#aeaeae]'>
+                            <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                            <td><CustomAvatar name={item.userName} /></td>
                             {columns.map((column: any) => (
-                                <td key={column.accessorKey} className='text-center'>
+                                <td key={column.accessorKey} >
                                     {column.cell ? column.cell({ row: { original: item } }) : item[column.accessorKey]}
                                 </td>
                             ))}

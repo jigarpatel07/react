@@ -88,6 +88,22 @@ function SignUpForm({ initialValues, type, handleSubmit }: any) {
                                     </div>
                                     <ErrorMessage message={errors?.password as string} />
                                 </div>
+                                <div className="flex flex-col gap-0.5">
+                                    <div className="relative">
+                                        <CustomTextField
+                                            placeholder="confirmPassword"
+                                            name="confirmPassword"
+                                            type={showPassword ? "text" : "password"}
+                                        />
+                                        <AbsoluteIcon>
+                                            <FaLock color="#aeaeae" />
+                                        </AbsoluteIcon>
+                                        <div className="absolute right-0 top-0 h-full w-10 flex items-center justify-center pr-2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                                            {showPassword ? <FaEyeSlash color="#aeaeae" /> : <FaEye color="#aeaeae" />}
+                                        </div>
+                                    </div>
+                                    <ErrorMessage message={errors?.confirmPassword as string} />
+                                </div>
                                 <div className="flex gap-0.5 bg-[#2c2c2c90] rounded-md py-2.5 pr-4 pl-14 relative">
                                     <div className="flex">
                                         <p className='text-[#c2c2c250]'>Gender</p>

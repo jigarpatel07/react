@@ -30,12 +30,16 @@ export const AuthSlice = createSlice({
             const userIndex = state.usersData.findIndex((user) => user.email === email);
             if (userIndex !== -1) {
                 state.usersData[userIndex] = { ...state.usersData[userIndex], ...updatedUserData };
-                state.user = action.payload
             }
+        },
+        deleteUser: (state, action: PayloadAction<string>) => {
+            const email = action.payload;
+            const updateUserData = state.usersData.filter((item) => item.email !== email);
+            state.usersData = updateUserData
         },
     },
 })
 
-export const { registerUser, updateUser, user, logout } = AuthSlice.actions
+export const { registerUser, updateUser, user, logout, deleteUser } = AuthSlice.actions
 
 export default AuthSlice.reducer

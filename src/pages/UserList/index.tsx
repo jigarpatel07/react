@@ -1,29 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from '../../components/Table';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store';
+import UserUpdateModal from '../../components/Modal/UserUpdateModal';
+import UserDeleteModal from '../../components/Modal/UserDeleteModal';
 
 function UserList() {
     const usersData = useSelector((state: RootState) => state.Auth.usersData)
-    console.log({ usersData });
-
-    const data = [
-        { id: 1, name: 'Product A', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 2, name: 'Product B', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-        { id: 3, name: 'Product C', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 4, name: 'Product D', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-        { id: 5, name: 'Product E', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 6, name: 'Product F', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-        { id: 7, name: 'Product G', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 8, name: 'Product H', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-        { id: 1, name: 'Product I', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 2, name: 'Product J', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-        { id: 1, name: 'Product K', category: 'Category A', stock: 10, status: 'available', price: 100 },
-        { id: 2, name: 'Product L', category: 'Category B', stock: 20, status: 'unavailable', price: 200 },
-
-    ];
-
+    const [isUserUpdateModalOpen, setIsUserUpdateModalOpen] = useState<boolean>(false);
+    const [isUserDeleteModalOpen, setIsUserDeleteModalOpen] = useState<boolean>(false);
+    const [editUser, setEditUser] = useState({
+        userName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "Male",
+        profession: { value: "", label: "Select an option..." },
+        interests: []
+    })
+    const [deleteUser, setDeleteUser] = useState("")
     const columns = [
         {
             header: 'Name',
@@ -72,13 +68,19 @@ function UserList() {
             <div className="flex justify-center items-center text-lg">
                 <span
                     className={`cursor-pointer p-2 hover:text-blue-500`}
-                // onClick={onEdit}
+                    onClick={() => {
+                        setEditUser(row)
+                        setIsUserUpdateModalOpen(true)
+                    }}
                 >
                     <HiOutlinePencil />
                 </span>
                 <span
                     className="cursor-pointer p-2 hover:text-red-500"
-                // onClick={onDelete}
+                    onClick={() => {
+                        setDeleteUser(row.email)
+                        setIsUserDeleteModalOpen(true)
+                    }}
                 >
                     <HiOutlineTrash />
                 </span>
@@ -88,10 +90,17 @@ function UserList() {
     const itemsPerPage = 5; // Number of items to display per page
 
     return (
-        <div className='flex flex-col gap-5'>
-            <p className='text-[#aeaeae] text-xl'>User List</p>
-            <Table data={usersData} columns={columns} itemsPerPage={itemsPerPage} />
-        </div>
+        <>
+            {isUserUpdateModalOpen &&
+                <UserUpdateModal setModalClose={setIsUserUpdateModalOpen} userData={editUser} />}
+            {isUserDeleteModalOpen &&
+                <UserDeleteModal setModalClose={setIsUserDeleteModalOpen} deleteUserEmail={deleteUser} />
+            }
+            <div className='flex flex-col gap-5'>
+                <p className='text-[#aeaeae] text-xl'>User List</p>
+                <Table data={usersData} columns={columns} itemsPerPage={itemsPerPage} />
+            </div>
+        </>
     )
 }
 

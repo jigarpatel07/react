@@ -7,18 +7,6 @@ export const TABS = [
         name: "Home",
         path: ROUTES.HOME,
         icon: FaNoteSticky,
-        subMenu: [
-            {
-                subMenuName: "Users List",
-                subMenuPath: ROUTES.USERS,
-                subMenuIcon: FaUserAlt,
-            },
-            {
-                subMenuName: "menu4",
-                subMenuPath: ROUTES.MENUFOUR,
-                subMenuIcon: FaNoteSticky,
-            },
-        ]
     },
     {
         name: "My Profile",

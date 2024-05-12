@@ -8,7 +8,7 @@ import { FaBrain, FaUserAlt } from "react-icons/fa";
 import { TABS } from '../../constant/tab.constant'
 import classNames from 'classnames'
 import { logout } from '../../store/AuthStore/AuthStoreSlice'
-import UserUpdateModal from '../UserUpdateModal'
+import UserUpdateModal from '../../components/Modal/UserUpdateModal'
 import Tabs from './Tabs'
 
 function View({ children }: any) {
@@ -29,7 +29,7 @@ function View({ children }: any) {
     };
     return (
         <>
-            {isUserUpdateModalOpen && <UserUpdateModal setIsUserUpdateModalOpen={setIsUserUpdateModalOpen} />}
+            {isUserUpdateModalOpen && <UserUpdateModal setModalClose={setIsUserUpdateModalOpen} profileUpdate={true} />}
             <div className="w-full min-h-screen flex relative overflow-hidden">
                 <div className="w-[80px] lg:w-[220px] xl:w-[280px] min-h-screen bg-[#282828]">
                     <div className="h-16 px-4 pt-2 border-b border-r border-[#a1a1a130]">
@@ -61,7 +61,7 @@ function View({ children }: any) {
                                 )}
                                 onClick={handleLogout}
                             >
-                                <div className="w-9 h-full flex items-center justify-center lg:pl-2 pl-0">
+                                <div className="w-9 h-full flex items-center justify-center">
                                     <IoLogOut
                                         size={26}
                                         color={"#aeaeae"}

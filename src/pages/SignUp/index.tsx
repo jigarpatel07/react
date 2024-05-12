@@ -12,6 +12,7 @@ function SignUp() {
         userName: "",
         email: "",
         password: "",
+        confirmPassword: "",
         gender: "Male",
         profession: { value: "", label: "Select an option..." },
         interests: []

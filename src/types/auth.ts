@@ -6,6 +6,7 @@ export type SignUpValue = {
     userName: string;
     email: string;
     password: string;
+    confirmPassword: string;
     gender: string;
     profession: {
         value: string;

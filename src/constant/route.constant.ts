@@ -9,7 +9,6 @@ export const HOME = "/"
 export const PROFILE = "/profile"
 export const MENUONE = "/menu1"
 export const MENUTWO = "/menu2"
-export const USERS = "/users"
 export const MENUFOUR = "/menu4"
 export const SIGN_IN = "/sign-in";
 export const SIGN_UP = "/sign-up";
@@ -18,7 +17,7 @@ export const ROUTES = {
     PRIVATE_ROUTE: [
         {
             path: HOME,
-            element: Home,
+            element: UserList,
         },
         {
             path: PROFILE,
@@ -31,10 +30,6 @@ export const ROUTES = {
         {
             path: MENUTWO,
             element: Profile,
-        },
-        {
-            path: USERS,
-            element: UserList,
         },
         {
             path: MENUFOUR,
