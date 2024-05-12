@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import AuthReducer from "./AuthStore/AuthStoreSlice"
+import TodoReducer from "./TodoStore/TodoStoreSlice"
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -9,7 +10,8 @@ const persistConfig = {
     storage
 }
 const reducer = combineReducers({
-    Auth: AuthReducer
+    Auth: AuthReducer,
+    Todo: TodoReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -7,7 +7,7 @@ function ModalHeader({ title, setModalClose }: { title: string; setModalClose: R
             <h1 className="text-white font-semibold opacity-70 text-lg">
                 {title}
             </h1>
-            <IoClose color="#aeaeae" className="cursor-pointer" size={24} onClick={() => setModalClose(false)} />
+            <IoClose color="#aeaeae" className="cursor-pointer hover:rotate-180  hover:duration-500" size={24} onClick={() => setModalClose(false)} />
         </div>
     )
 }

@@ -28,3 +28,8 @@ export const SignUpSchema = Yup.object().shape({
             label: Yup.string()
         })),
 });
+
+export const TodoSchema = Yup.object().shape({
+    title: Yup.string().required('Title is required'),
+    description: Yup.string().required('Description is required'),
+});

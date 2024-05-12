@@ -42,8 +42,6 @@ function SignUpForm({ initialValues, type, handleSubmit }: any) {
                 validationSchema={SignUpSchema}
                 onSubmit={(value) => handleSubmit(value)}>
                 {({ errors, values, setFieldValue }) => {
-                    console.log({ errors });
-
                     return (
                         <Form>
                             <div className="flex flex-col gap-2.5 mb-7">
@@ -131,6 +129,9 @@ function SignUpForm({ initialValues, type, handleSubmit }: any) {
                                                 onChange={(option) => setFieldValue('profession', option)}
                                                 styles={customStyles}
                                                 placeholder="Select an option..."
+                                                components={{
+                                                    IndicatorSeparator: () => null
+                                                }}
                                             />
                                             <AbsoluteIcon>
                                                 <FaDev color="#aeaeae" />
@@ -161,7 +162,7 @@ function SignUpForm({ initialValues, type, handleSubmit }: any) {
                                     className="w-full text-white rounded-md py-3 mt-3 bg-[#262626]"
                                     type="submit"
                                 >
-                                    {type === "add" ? "Register" : "Update Profile"}
+                                    {type === "add" ? "Register" : "Update"}
                                 </button>
                                 {type === "add" && <p className='w-full text-white text-center'>Already have an account? <span className='font-semibold cursor-pointer' onClick={() => navigate(SIGN_IN)}>Login</span> </p>}
                             </div>

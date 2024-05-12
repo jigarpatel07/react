@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames'
 import CustomAvatar from './CustomAvatar';
+import Select from 'react-select';
+import { customStyles, itemsPerPageData } from '../constant/constant';
 
-const Table = ({ data, columns, itemsPerPage }: any) => {
+const Table = ({ data, columns }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState([]);
-    const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
+    const [itemsPerPage, setItemsPerPage] = useState({ value: 5, label: "5" })
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     useEffect(() => {
-        const indexOfLastItem = currentPage * itemsPerPage;
-        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        const indexOfLastItem = currentPage * itemsPerPage.value;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage.value;
         setCurrentItems(data.slice(indexOfFirstItem, indexOfLastItem));
-    }, [currentPage, data, itemsPerPage]);
+    }, [currentPage, data, itemsPerPage.value]);
 
     return (
         <div className='flex flex-col gap-4 '>
@@ -28,7 +31,7 @@ const Table = ({ data, columns, itemsPerPage }: any) => {
                 <tbody >
                     {currentItems?.map((item: any, index) => (
                         <tr key={index} className='text-center text-[#aeaeae]'>
-                            <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                            <td>{index + 1 + (currentPage - 1) * itemsPerPage.value}</td>
                             <td><CustomAvatar name={item.userName} /></td>
                             {columns.map((column: any) => (
                                 <td key={column.accessorKey} >
@@ -41,6 +44,7 @@ const Table = ({ data, columns, itemsPerPage }: any) => {
             </table>
             <Pagination
                 itemsPerPage={itemsPerPage}
+                setItemsPerPage={setItemsPerPage}
                 totalItems={data.length}
                 paginate={paginate}
                 currentPage={currentPage}
@@ -49,9 +53,8 @@ const Table = ({ data, columns, itemsPerPage }: any) => {
     );
 };
 
-const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }: any) => {
-
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+const Pagination = ({ itemsPerPage, setItemsPerPage, totalItems, paginate, currentPage }: any) => {
+    const totalPages = Math.ceil(totalItems / itemsPerPage.value);
     const pages = [];
 
     // Function to add a page number to the list
@@ -82,7 +85,18 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }: any) =>
         addPage(totalPages);
     }
 
-    return <ul className={classNames('text-[#aeaeae] text-base text-start flex gap-2',)}>{pages}</ul>;
+    return (<div className='flex items-center gap-3 justify-end'>
+        <ul className={classNames('text-[#aeaeae] text-base text-start flex gap-2',)} > {pages}</ul>
+        <Select
+            options={itemsPerPageData}
+            value={itemsPerPage}
+            onChange={(option: any) => setItemsPerPage(option)}
+            styles={customStyles}
+            components={{
+                IndicatorSeparator: () => null
+            }}
+        />
+    </div>)
 };
 
 export default Table

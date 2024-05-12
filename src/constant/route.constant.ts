@@ -1,15 +1,13 @@
-import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import NoPage from "../pages/NoPage";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import UserList from "../pages/UserList";
+import Todo from "../pages/Todo";
 
 export const HOME = "/"
 export const PROFILE = "/profile"
-export const MENUONE = "/menu1"
-export const MENUTWO = "/menu2"
-export const MENUFOUR = "/menu4"
+export const TODO = "/todo"
 export const SIGN_IN = "/sign-in";
 export const SIGN_UP = "/sign-up";
 
@@ -24,18 +22,9 @@ export const ROUTES = {
             element: Profile,
         },
         {
-            path: MENUONE,
-            element: Profile,
+            path: TODO,
+            element: Todo,
         },
-        {
-            path: MENUTWO,
-            element: Profile,
-        },
-        {
-            path: MENUFOUR,
-            element: Home,
-        },
-
     ],
     PUBLIC_ROUTE: [
         {

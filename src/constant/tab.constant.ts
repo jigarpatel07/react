@@ -1,7 +1,7 @@
 import * as ROUTES from "./route.constant";
 import { FaNoteSticky } from "react-icons/fa6";
 import { FaUserAlt } from "react-icons/fa";
-
+import { BsFilePerson } from "react-icons/bs";
 export const TABS = [
     {
         name: "Home",
@@ -9,18 +9,18 @@ export const TABS = [
         icon: FaNoteSticky,
     },
     {
-        name: "My Profile",
-        path: ROUTES.PROFILE,
+        name: "Profile",
+        path: "",
         icon: FaUserAlt,
         subMenu: [
             {
-                subMenuName: "menu1",
-                subMenuPath: ROUTES.MENUONE,
-                subMenuIcon: FaUserAlt,
+                subMenuName: "My Profile",
+                subMenuPath: ROUTES.PROFILE,
+                subMenuIcon: BsFilePerson,
             },
             {
-                subMenuName: "menu2",
-                subMenuPath: ROUTES.MENUTWO,
+                subMenuName: "Notes",
+                subMenuPath: ROUTES.TODO,
                 subMenuIcon: FaNoteSticky,
             },
         ]

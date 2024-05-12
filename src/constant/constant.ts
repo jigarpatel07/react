@@ -26,3 +26,45 @@ export const interestsData = [
         value: "movies"
     },
 ]
+export const itemsPerPageData = [
+    {
+        label: "5",
+        value: 5
+    },
+    {
+        label: "10",
+        value: 10
+    },
+    {
+        label: "20",
+        value: 20
+    },
+]
+export const todoOptionData = [
+    {
+        label: "Todo",
+        value: "Todo"
+    },
+    {
+        label: "Done",
+        value: "Done"
+    },
+]
+export const customStyles = {
+    control: (provided: any) => ({
+        ...provided,
+        backgroundColor: 'transpart',
+        color: '#aeaeae',
+        borderColor: "unset !important",
+        boxShadow: "unset !important"
+    }),
+    option: (provided: any) => ({
+        ...provided,
+        backgroundColor: '#2c2c2c',
+        color: '#aeaeae',
+    }),
+    singleValue: (provided: any) => ({
+        ...provided,
+        color: '#aeaeae',
+    }),
+};

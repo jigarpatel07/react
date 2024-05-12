@@ -21,8 +21,9 @@ function CustomTextField({
                 name={name}
                 fullWidth
                 type={type}
+                as={multiline && "textarea"}
                 multiline={multiline}
-                rows={multiline && 4}
+                rows={multiline ? 4 : undefined}
                 margin="normal"
                 placeholder={placeholder}
                 disabled={isDisabled}
